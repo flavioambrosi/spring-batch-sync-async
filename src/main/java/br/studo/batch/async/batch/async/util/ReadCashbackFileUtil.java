@@ -1,4 +1,4 @@
-package br.studo.batch.async.batch.async;
+package br.studo.batch.async.batch.async.util;
 
 import br.studo.batch.async.batch.async.model.CashbackRequest;
 import com.opencsv.CSVReader;

@@ -1,26 +1,15 @@
 package br.studo.batch.async.batch.async.reader;
 
-import br.studo.batch.async.batch.async.ReadCashbackFileUtil;
 import br.studo.batch.async.batch.async.model.CashbackRequest;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+import br.studo.batch.async.batch.async.util.ReadCashbackFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
-import org.springframework.batch.item.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.ItemReader;
 
-import java.io.*;
-import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
 
 @Slf4j
 public class ItemFileReader implements ItemReader<CashbackRequest> {
@@ -45,6 +34,7 @@ public class ItemFileReader implements ItemReader<CashbackRequest> {
     public CashbackRequest read() throws Exception {
         CashbackRequest request = null;
         if(this.cashbackRequestList == null){
+            log.error("DEU ERRO NO LISTENER");
             this.cashbackRequestList = ReadCashbackFileUtil.readFile(fileInput);
         }
 

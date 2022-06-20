@@ -23,9 +23,6 @@ public class JobScheduler {
     private JobAsyncConfiguration jobAsyncConfiguration;
 
     @Autowired
-    private AsyncProcessingBatchPerformance asyncProcessingBatchPerformance;
-
-    @Autowired
     private JobLauncher jobLauncher;
 
     @Scheduled(cron = "*/30 * * * * *")
@@ -34,7 +31,7 @@ public class JobScheduler {
         Date date = new Date();
 
 
-        JobExecution jobExecution = jobLauncher.run(asyncProcessingBatchPerformance.asyncJob(), new JobParametersBuilder().addDate("launchDate", date)
+        JobExecution jobExecution = jobLauncher.run(jobAsyncConfiguration.asyncJob(), new JobParametersBuilder().addDate("launchDate", date)
                 .toJobParameters());
 
 //        JobExecution jobExecution = jobLauncher.run(jobSyncConfiguration.importUserJob(), new JobParametersBuilder().addDate("launchDate", date)
